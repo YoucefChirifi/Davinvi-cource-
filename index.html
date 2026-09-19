@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
 <style>
 /* ============================================================
    1. DESIGN TOKENS
@@ -72,7 +71,7 @@ button{font-family:var(--font-body); cursor:pointer;}
   backdrop-filter: blur(10px);
   border-bottom:1px solid var(--line);
 }
-.topbar-brand{display:flex; align-items:center; gap:9px; font-family:var(--font-display); font-weight:600; font-size:15px; white-space:nowrap; letter-spacing:.01em;}
+.topbar-brand{display:flex; align-items:center; gap:9px; font-family:var(--font-display); font-weight:600; font-size:15px; white-space:nowrap; letter-spacing:.01em; text-decoration:none;}
 .topbar-brand .dot{width:8px;height:8px;border-radius:50%;background:var(--accent); box-shadow:0 0 0 3px var(--accent-soft);}
 .topbar-search{flex:1; max-width:360px; position:relative; display:none;}
 @media(min-width:860px){ .topbar-search{display:block;} }
@@ -86,6 +85,7 @@ button{font-family:var(--font-body); cursor:pointer;}
   display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px;
   border-radius:var(--radius); border:1px solid transparent; background:transparent; color:var(--ink-dim);
 }
+.icon-btn svg{width:20px; height:20px;}
 .icon-btn:hover{background:var(--bg-raised); color:var(--ink); border-color:var(--line);}
 .progress-pill{
   display:flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px;
@@ -108,6 +108,7 @@ button{font-family:var(--font-body); cursor:pointer;}
   display:flex; align-items:center; gap:9px; padding:9px 10px; border-radius:var(--radius); color:var(--ink-dim);
   font-size:13.5px; text-decoration:none; margin-bottom:2px;
 }
+.sb-link svg{width:15px; height:15px;}
 .sb-link:hover{background:var(--bg-raised); color:var(--ink);}
 .sb-link.active{background:var(--accent-soft); color:var(--accent); font-weight:500;}
 .sb-section-label{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.08em; color:var(--ink-faint); padding:16px 10px 6px; text-transform:uppercase;}
@@ -119,7 +120,8 @@ button{font-family:var(--font-body); cursor:pointer;}
 .sb-module-head:hover{background:var(--bg-raised);}
 .sb-module-head .chev{margin-left:auto; width:14px; height:14px; opacity:.6; transition:transform .18s ease; flex:none;}
 .sb-module-head[aria-expanded="true"] .chev{transform:rotate(90deg);}
-.sb-module-progress{font-family:var(--font-mono); font-size:10.5px; color:var(--ink-faint);}
+.sb-module-progress{font-family:var(--font-mono); font-size:10.5px; color:var(--ink-faint); margin-left:auto;}
+.sb-module-progress + .chev{margin-left:0;}
 .sb-lessons{padding-left:10px; border-left:1px solid var(--line-soft); margin-left:19px; overflow:hidden; max-height:0; transition:max-height .22s ease;}
 .sb-lessons.open{max-height:900px;}
 .sb-lesson{
@@ -229,6 +231,7 @@ textarea.note-box{width:100%; min-height:84px; background:var(--bg-raised); bord
 .hero-stats{display:flex; flex-wrap:wrap; gap:22px; font-family:var(--font-mono); font-size:12.5px; color:var(--ink-dim);}
 .hero-stats b{color:var(--ink); font-size:15px; display:block; font-family:var(--font-display);}
 .hero-scope{border:1px solid var(--line); border-radius:var(--radius-lg); background:var(--bg-panel); padding:18px; margin-top:34px; overflow:hidden;}
+.hero-scope svg{max-width:320px; margin:0 auto; display:block; width:100%; height:auto;}
 .stage-row{display:flex; align-items:center; flex-wrap:wrap; gap:0; margin:30px 0;}
 .stage-pill{padding:9px 16px; border-radius:999px; border:1px solid var(--line); background:var(--bg-panel); font-size:12.5px; font-family:var(--font-mono);}
 .stage-arrow{color:var(--ink-faint); padding:0 8px; font-size:13px;}
@@ -243,7 +246,7 @@ textarea.note-box{width:100%; min-height:84px; background:var(--bg-raised); bord
 
 /* node tree */
 .node-tree{display:flex; flex-direction:column; align-items:stretch; gap:0; max-width:460px; margin:0 auto;}
-.node-item{padding:13px 16px; border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-panel); font-size:13.5px; font-family:var(--font-mono); text-align:center; position:relative;}
+.node-item{padding:13px 16px; border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-panel); color:var(--ink); font-size:13.5px; font-family:var(--font-mono); text-align:center; position:relative;}
 .node-item.active{border-color:var(--accent); background:var(--accent-soft); color:var(--accent);}
 .node-connector{width:1px; height:20px; background:var(--line); margin:0 auto;}
 .node-info{margin-top:20px;}
@@ -254,9 +257,9 @@ textarea.note-box{width:100%; min-height:84px; background:var(--bg-raised); bord
 .ba-before{background:linear-gradient(135deg,#8d8878,#6f7268 45%,#87867c);filter:saturate(.35) contrast(.82) brightness(1.08);}
 .ba-after{background:linear-gradient(135deg,#0f3d3a,#1c2b3d 40%,#5c3a1e 100%); filter:saturate(1.15) contrast(1.12);}
 .ba-after{clip-path: inset(0 0 0 50%);}
-.ba-label{position:absolute; top:10px; font-family:var(--font-mono); font-size:11px; letter-spacing:.05em; background:rgba(0,0,0,.5); color:#fff; padding:4px 9px; border-radius:4px;}
+.ba-label{position:absolute; top:10px; font-family:var(--font-mono); font-size:11px; letter-spacing:.05em; background:rgba(0,0,0,.5); color:#fff; padding:4px 9px; border-radius:4px; z-index:3;}
 .ba-label.l{left:10px;} .ba-label.r{right:10px;}
-.ba-handle{position:absolute; top:0; bottom:0; left:50%; width:2px; background:#fff; cursor:ew-resize;}
+.ba-handle{position:absolute; top:0; bottom:0; left:50%; width:2px; background:#fff; cursor:ew-resize; z-index:2;}
 .ba-handle::after{content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:34px; height:34px; border-radius:50%; background:#fff; box-shadow:0 2px 8px rgba(0,0,0,.4);}
 .ba-handle::before{content:'⇔'; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:2; color:#111; font-size:15px;}
 
@@ -402,7 +405,7 @@ function currentRoute(){
   const parts = h.split('/');
   return { view: parts[0]||'landing', param: parts.slice(1).join('/') };
 }
-window.addEventListener('hashchange', render);
+window.addEventListener('hashchange', ()=>render());
 
 /* ============================================================
    7. LESSON RENDERING
@@ -420,7 +423,7 @@ function iconBook(){return '<svg viewBox="0 0 24 24" fill="none" stroke="current
 function renderLessonHeader(l, idx){
   return `
   <div style="margin-bottom:22px;">
-    <div class="eyebrow-mono">${findModule(l.moduleId).title.toUpperCase()}${l.moduleLevel?' · '+l.moduleLevel:''}</div>
+    <div class="eyebrow-mono">${escapeHtml(findModule(l.moduleId).title)}${l.moduleLevel?' · '+escapeHtml(l.moduleLevel):''}</div>
     <h1 style="font-size:clamp(23px,3.4vw,32px); margin:8px 0 12px;">Lesson ${l.id} — ${escapeHtml(l.title)}</h1>
     <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
       <span class="badge">${l.difficulty}</span>
@@ -615,7 +618,7 @@ function toggleBookmark(id){
   const has = STATE.bookmarks.includes(id);
   if(has) STATE.bookmarks = STATE.bookmarks.filter(x=>x!==id);
   else { STATE.bookmarks.push(id); showToast('Bookmarked'); }
-  saveState(); renderSidebarOnly();
+  saveState(); render();
 }
 function saveNote(id, value){
   STATE.notes[id] = value; saveState();
@@ -674,8 +677,8 @@ function svgFor(type){
         <line x1="150" y1="30" x2="150" y2="270" stroke="${line}"/>
         <line x1="60" y1="230" x2="240" y2="70" stroke="${accent2}" stroke-dasharray="4 4" stroke-width="1.5"/>
         <text x="238" y="66" font-family="IBM Plex Mono" font-size="9" fill="${accent2}">skin line</text>
-        ${[['R',210,60],['Yl',240,150],['G',210,240],['Cy',90,240],['B',60,150],['Mg',90,60]].map(([t,x,y])=>`<text x="${x}" y="${y}" font-family="IBM Plex Mono" font-size="10" fill="${stroke}" text-anchor="middle">${t}</text>`)}
-        <circle cx="188" cy="108" r="5" fill="${accent}" style="--len:0"/>
+        ${[['R',210,60],['Yl',240,150],['G',210,240],['Cy',90,240],['B',60,150],['Mg',90,60]].map(([t,x,y])=>`<text x="${x}" y="${y}" font-family="IBM Plex Mono" font-size="10" fill="${stroke}" text-anchor="middle">${t}</text>`).join('')}
+        <circle cx="188" cy="108" r="5" fill="${accent}"/>
       </svg>`;
     case 'cst':
       return `<svg viewBox="0 0 560 100" class="scope-anim">
@@ -691,7 +694,7 @@ function svgFor(type){
         <defs><marker id="arrow2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="${line}"/></marker></defs>
       </svg>`;
     case 'scurve':
-      return `<svg viewBox="0 0 220 220" class="scope-anim">
+      return `<svg viewBox="0 0 220 220" class="scope-anim" style="max-width:320px;margin:0 auto;">
         <rect x="10" y="10" width="200" height="200" fill="none" stroke="${line}"/>
         <line x1="10" y1="210" x2="210" y2="10" stroke="${line}" stroke-dasharray="3 3"/>
         <path d="M10,210 C70,210 60,150 110,110 C160,70 150,10 210,10" fill="none" stroke="${accent}" stroke-width="2" style="--len:300"/>
@@ -724,9 +727,9 @@ function svgFor(type){
       </svg>`;
     case 'mixer':
       return `<svg viewBox="0 0 260 140" class="scope-anim">
-        ${['R','G','B'].map((t,i)=>`<text x="20" y="${30+i*40}" font-family="IBM Plex Mono" font-size="11" fill="${stroke}">${t} out</text>`)}
-        ${['R','G','B'].map((t,i)=>`<text x="230" y="${30+i*40}" text-anchor="end" font-family="IBM Plex Mono" font-size="11" fill="${stroke}">${t} in</text>`)}
-        ${[0,1,2].flatMap(o=>[0,1,2].map(i=>`<line x1="55" y1="${25+o*40}" x2="200" y2="${25+i*40}" stroke="${o===i?accent:line}" stroke-width="${o===i?2:1}" opacity="${o===i?1:.35}" style="--len:200"/>`)).join('')}
+        ${['R','G','B'].map((t,i)=>`<text x="20" y="${30+i*40}" font-family="IBM Plex Mono" font-size="11" fill="${stroke}">${t} out</text>`).join('')}
+        ${['R','G','B'].map((t,i)=>`<text x="230" y="${30+i*40}" text-anchor="end" font-family="IBM Plex Mono" font-size="11" fill="${stroke}">${t} in</text>`).join('')}
+        ${[0,1,2].flatMap(o=>[0,1,2].map(i=>`<line x1="55" y1="${25+o*40}" x2="200" y2="${25+i*40}" stroke="${o===i?accent:line}" stroke-width="${o===i?2:1}" opacity="${o===i?1:.35}"/>`)).join('')}
       </svg>`;
     default: return '';
   }
@@ -768,7 +771,7 @@ function renderSimulatorBox(type){
   if(type==='vectorscope'){
     return `<div class="diagram-box">
       <div class="lbl">Interactive vectorscope simulator</div>
-      <svg viewBox="0 0 260 260" id="vecSimSvg">
+      <svg viewBox="0 0 260 260" id="vecSimSvg" style="max-width:320px;margin:0 auto;">
         <circle cx="130" cy="130" r="105" fill="none" stroke="var(--line)"/>
         <circle cx="130" cy="130" r="70" fill="none" stroke="var(--line)"/>
         <circle cx="130" cy="130" r="35" fill="none" stroke="var(--line)"/>
@@ -787,7 +790,8 @@ function renderSimulatorBox(type){
   return '';
 }
 function updateWfSim(){
-  const ex = parseInt(document.getElementById('wfExposure').value,10);
+  const slider = document.getElementById('wfExposure'); if(!slider) return;
+  const ex = parseInt(slider.value,10);
   document.getElementById('wfExposureVal').textContent = ex;
   const base = [120,80,140,70,110,50,90,60];
   const pts = base.map((y,i)=> Math.max(6, Math.min(154, y - ex)));
@@ -796,7 +800,8 @@ function updateWfSim(){
   const path = document.getElementById('wfSimPath'); if(path) path.setAttribute('d', d);
 }
 function updateParSim(){
-  const r = parseInt(document.getElementById('parR').value,10);
+  const rEl = document.getElementById('parR'); if(!rEl) return;
+  const r = parseInt(rEl.value,10);
   const g = parseInt(document.getElementById('parG').value,10);
   const b = parseInt(document.getElementById('parB').value,10);
   document.getElementById('parRVal').textContent=r; document.getElementById('parGVal').textContent=g; document.getElementById('parBVal').textContent=b;
@@ -811,7 +816,8 @@ function updateParSim(){
   });
 }
 function updateVecSim(){
-  const hue = parseInt(document.getElementById('vecHue').value,10);
+  const hueEl = document.getElementById('vecHue'); if(!hueEl) return;
+  const hue = parseInt(hueEl.value,10);
   const sat = parseInt(document.getElementById('vecSat').value,10);
   document.getElementById('vecHueVal').textContent = hue+'°';
   document.getElementById('vecSatVal').textContent = sat+'%';
@@ -862,13 +868,13 @@ function renderLanding(){
       <h2 style="font-size:22px; margin-bottom:16px;">Course roadmap</h2>
       ${COURSE_MODULES.map((m,i)=>{
         const count = m.lessons ? m.lessons.length : (m.workflow?m.workflow.length:0);
-        const firstId = m.lessons ? m.lessons[0].id : '9.1';
+        const href = m.lessons ? '#lesson/'+m.lessons[0].id : '#workflow';
         const done = m.lessons ? m.lessons.filter(l=>STATE.completed.includes(l.id)).length : 0;
-        return `<a href="#lesson/${m.lessons?firstId:''}" ${!m.lessons?`onclick="go('#workflow');return false;"`:''} style="text-decoration:none;color:inherit;">
+        return `<a href="${href}" style="text-decoration:none;color:inherit;">
         <div class="roadmap-item">
           <div class="roadmap-num">${String(i).padStart(2,'0')}</div>
           <div style="flex:1;">
-            <div style="font-family:var(--font-display);font-weight:600;font-size:15px;">${escapeHtml(m.title)} ${m.level?`<span class="badge" style="margin-left:8px;">${m.level}</span>`:''}</div>
+            <div style="font-family:var(--font-display);font-weight:600;font-size:15px;">${escapeHtml(m.title)} ${m.level?`<span class="badge" style="margin-left:8px;">${escapeHtml(m.level)}</span>`:''}</div>
             <div style="font-size:13px;color:var(--ink-dim);margin-top:3px;">${escapeHtml(m.description)}</div>
             <div style="font-size:11.5px;color:var(--ink-faint);margin-top:6px;font-family:var(--font-mono);">${count} ${m.lessons?'lessons':'steps'}${m.lessons?` · ${done} completed`:''}</div>
           </div>
@@ -1068,6 +1074,8 @@ function renderWorkflow(){
     `).join('')}
   </div>`;
 }
+let baListenersBound = false;
+let baDragging = false;
 function initBeforeAfter(){
   const wrap = document.getElementById('baWrap'); if(!wrap) return;
   const handle = document.getElementById('baHandle'); const after = document.getElementById('baAfter');
@@ -1077,17 +1085,20 @@ function initBeforeAfter(){
     handle.style.left = pct+'%';
   }
   function fromEvent(e){
-    const rect = wrap.getBoundingClientRect();
+    const w = document.getElementById('baWrap'); if(!w) return;
+    const rect = w.getBoundingClientRect();
     const x = (e.touches?e.touches[0].clientX:e.clientX) - rect.left;
     setPct((x/rect.width)*100);
   }
-  let dragging=false;
-  wrap.addEventListener('mousedown', e=>{dragging=true; fromEvent(e);});
-  window.addEventListener('mousemove', e=>{if(dragging) fromEvent(e);});
-  window.addEventListener('mouseup', ()=>dragging=false);
-  wrap.addEventListener('touchstart', e=>{dragging=true; fromEvent(e);});
-  wrap.addEventListener('touchmove', e=>{if(dragging) fromEvent(e);});
-  wrap.addEventListener('touchend', ()=>dragging=false);
+  wrap.addEventListener('mousedown', e=>{baDragging=true; fromEvent(e);});
+  wrap.addEventListener('touchstart', e=>{baDragging=true; fromEvent(e);}, {passive:true});
+  wrap.addEventListener('touchmove', e=>{if(baDragging) fromEvent(e);}, {passive:true});
+  wrap.addEventListener('touchend', ()=>{baDragging=false;});
+  if(!baListenersBound){
+    baListenersBound = true;
+    window.addEventListener('mousemove', e=>{ if(baDragging){ const w=document.getElementById('baWrap'); if(!w){ baDragging=false; return; } const rect=w.getBoundingClientRect(); const pct=((e.clientX-rect.left)/rect.width)*100; const a=document.getElementById('baAfter'), h=document.getElementById('baHandle'); const p=Math.max(0,Math.min(100,pct)); a.style.clipPath=`inset(0 0 0 ${p}%)`; h.style.left=p+'%'; } });
+    window.addEventListener('mouseup', ()=>{baDragging=false;});
+  }
 }
 
 function renderSearchPage(){
@@ -1134,7 +1145,7 @@ function sidebarHtml(route){
     ['#workflow','Complete Workflow', iconTool()],
     ['#checklist','Final Checklist', iconCheck()],
   ];
-  let html = items.map(([href,label,icon])=>`<a class="sb-link ${('#'+route.view)===href?'active':''}" href="${href}"><span style="width:15px;height:15px;display:inline-flex;">${icon}</span>${label}</a>`).join('');
+  let html = items.map(([href,label,icon])=>`<a class="sb-link ${('#'+route.view)===href?'active':''}" href="${href}">${icon}${label}</a>`).join('');
   html += `<div class="sb-section-label">Course modules</div>`;
   COURSE_MODULES.forEach(m=>{
     const lessons = m.lessons || [];
@@ -1184,7 +1195,7 @@ function topbarHtml(){
     <div class="search-results" id="topSearchResults"></div>
   </div>
   <div class="topbar-right">
-    <button class="icon-btn" style="display:${window.innerWidth<860?'inline-flex':'none'};" onclick="go('#search')" aria-label="Search">
+    <button class="icon-btn" id="mobileSearchBtn" style="display:${window.innerWidth<860?'inline-flex':'none'};" onclick="go('#search')" aria-label="Search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     </button>
     <div class="progress-pill" title="Overall progress"><span class="mono">${pct}%</span><span class="bar"><span style="width:${pct}%"></span></span></div>
@@ -1196,18 +1207,30 @@ function topbarHtml(){
     </button>
   </div>`;
 }
-function openDrawer(){ document.getElementById('mobileSidebar').classList.add('open'); document.getElementById('drawerBackdrop').classList.add('open'); }
-function closeDrawer(){ document.getElementById('mobileSidebar').classList.remove('open'); document.getElementById('drawerBackdrop').classList.remove('open'); }
+/* FIX: these were the crash. They must tolerate elements that do not exist yet (first render). */
+function openDrawer(){
+  const d = document.getElementById('mobileSidebar');
+  const b = document.getElementById('drawerBackdrop');
+  if(d) d.classList.add('open');
+  if(b) b.classList.add('open');
+}
+function closeDrawer(){
+  const d = document.getElementById('mobileSidebar');
+  const b = document.getElementById('drawerBackdrop');
+  if(d) d.classList.remove('open');
+  if(b) b.classList.remove('open');
+}
 function toggleTheme(){
   STATE.theme = STATE.theme==='dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', STATE.theme);
   saveState();
 }
-function openKbdModal(){ document.getElementById('kbdModal').classList.add('open'); }
-function closeKbdModal(){ document.getElementById('kbdModal').classList.remove('open'); }
+function openKbdModal(){ const m=document.getElementById('kbdModal'); if(m) m.classList.add('open'); }
+function closeKbdModal(){ const m=document.getElementById('kbdModal'); if(m) m.classList.remove('open'); }
 
 function showToast(msg){
   const t = document.getElementById('toast');
+  if(!t) return;
   t.textContent = msg; t.classList.add('show');
   clearTimeout(window.__toastTimer);
   window.__toastTimer = setTimeout(()=>t.classList.remove('show'), 2200);
@@ -1228,17 +1251,19 @@ const WORKFLOW_STEPS = COURSE_MODULES.find(m=>m.id==='m9').workflow;
 document.addEventListener('click', (e)=>{
   if(!e.target.closest('.topbar-search')) closeTopSearch();
 });
-document.getElementById('drawerBackdrop') && document.getElementById('drawerBackdrop').addEventListener('click', closeDrawer);
+const _backdrop = document.getElementById('drawerBackdrop');
+if(_backdrop) _backdrop.addEventListener('click', closeDrawer);
 document.addEventListener('keydown', (e)=>{
   const tag = (e.target.tagName||'').toLowerCase();
   if(tag==='input' || tag==='textarea') return;
+  if(e.ctrlKey || e.metaKey || e.altKey) return;
   if(e.key==='Escape'){ closeDrawer(); closeKbdModal(); return; }
   if(e.key==='m' || e.key==='M'){ const d=document.getElementById('mobileSidebar'); if(d && d.classList.contains('open')) closeDrawer(); else openDrawer(); return; }
   const route = currentRoute();
   if(route.view==='lesson'){
     const idx = lessonIndex(route.param);
-    if(e.key==='ArrowUp' && FLAT_LESSONS[idx-1]){ go('#lesson/'+FLAT_LESSONS[idx-1].id); }
-    if(e.key==='ArrowDown' && FLAT_LESSONS[idx+1]){ go('#lesson/'+FLAT_LESSONS[idx+1].id); }
+    if(e.key==='ArrowUp' && FLAT_LESSONS[idx-1]){ e.preventDefault(); go('#lesson/'+FLAT_LESSONS[idx-1].id); }
+    if(e.key==='ArrowDown' && FLAT_LESSONS[idx+1]){ e.preventDefault(); go('#lesson/'+FLAT_LESSONS[idx+1].id); }
     if(e.key==='b' || e.key==='B'){ toggleBookmark(route.param); }
     if(e.key==='c' || e.key==='C'){ toggleComplete(route.param); }
   }
@@ -1248,14 +1273,22 @@ document.addEventListener('keydown', (e)=>{
     else go('#search');
   }
 });
-document.getElementById('kbdModal') && document.getElementById('kbdModal').addEventListener('click', (e)=>{ if(e.target.id==='kbdModal') closeKbdModal(); });
-window.addEventListener('resize', ()=>{ const m=document.getElementById('menuBtn'); if(m) m.style.display = window.innerWidth<1024?'inline-flex':'none'; });
+const _kbd = document.getElementById('kbdModal');
+if(_kbd) _kbd.addEventListener('click', (e)=>{ if(e.target.id==='kbdModal') closeKbdModal(); });
+window.addEventListener('resize', ()=>{
+  const m=document.getElementById('menuBtn'); if(m) m.style.display = window.innerWidth<1024?'inline-flex':'none';
+  const s=document.getElementById('mobileSearchBtn'); if(s) s.style.display = window.innerWidth<860?'inline-flex':'none';
+});
 
 /* ============================================================
    16. INITIALIZATION / MAIN RENDER
    ============================================================ */
+let lastRouteKey = null;
 function render(){
   const route = currentRoute();
+  const routeKey = route.view + '/' + route.param;
+  const sameRoute = (routeKey === lastRouteKey);
+  const prevScroll = window.scrollY || 0;
   closeDrawer();
   if(route.view==='lesson' && route.param){
     const l = findLesson(route.param);
@@ -1294,7 +1327,10 @@ function render(){
       <main class="content" id="mainContent" tabindex="-1">${viewHtml}</main>
     </div>
   `;
-  window.scrollTo({top:0, behavior:'auto'});
+  // New page -> jump to top. Same page re-rendered (checkbox, bookmark, quiz) -> keep scroll position.
+  window.scrollTo({top: sameRoute ? prevScroll : 0, behavior:'auto'});
+  lastRouteKey = routeKey;
+
   if(route.view==='lesson'){
     const l = findLesson(route.param);
     if(l){
@@ -1307,7 +1343,6 @@ function render(){
 }
 
 document.documentElement.setAttribute('data-theme', STATE.theme || 'dark');
-if(!location.hash) location.hash = '#landing';
 render();
 </script>
 </body>
